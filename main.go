@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"os"
+	"log"
 
+	"github.com/PedroDalpa/primeiro-crud-golang/src/controller/routes"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
@@ -13,5 +14,12 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(os.Getenv("TEST"))
+	router := gin.Default()
+
+	routes.InitRoutes(&router.RouterGroup)
+
+	if err := router.Run(":8080"); err != nil {
+		log.Fatal(err)
+	}
+
 }
